@@ -13,8 +13,12 @@ async function getWorks() {
   
       //  TEST : Affiche les données dans la console
       console.log("Tous les travaux sont récupérés :", works);
+      
+      // je vide la galerie des anciens travaux 
+
+      gallery.innerHTML = ""; 
   
-      // (Tu peux laisser le reste du code pour afficher après)
+      // je créer mes nouveaux élements et je les raccroche aux dossiers parents
       works.forEach(work => {
         const figure = document.createElement("figure");
         const img = document.createElement("img");
