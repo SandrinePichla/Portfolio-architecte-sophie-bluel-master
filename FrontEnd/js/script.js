@@ -42,14 +42,14 @@ async function getWorks() {
 // --- 2 : PARTIE FILTRAGE Récupération des catégories uniques ---
     const uniqueCategories = []; // création d'un tableau vide pour stocker les catégories
     works.forEach(work => {
-      const categoryName = work.category.name; // Pour chaque travail, on va chercher le nom de la catégorie
+      const categoryName = work.category.name; // Pour chaque projet, on va chercher le nom de la catégorie
       if (!uniqueCategories.includes(categoryName)) {
         uniqueCategories.push(categoryName); // Si cette catégorie n’est pas encore dans notre tableau, on l’ajoute.
       }
     });
 
     // --- Création des boutons de filtre ---
-    // On ajoute le bouton tous :
+    // On ajoute le bouton tous = affichage par defaut de tous les projets
     const allButton = document.createElement("button"); // on crée le bouton HTML
     allButton.className = "filter-btn active"; // classe + active = selectionné
     allButton.dataset.category = "Tous"; // on note le nom de la catégorie dans le bouton
@@ -102,6 +102,8 @@ async function getWorks() {
           figure.appendChild(img);
           figure.appendChild(caption);
           gallery.appendChild(figure);
+
+           console.log("j'ai récuperé les projets de la catégorie :", selectedCategory); // je mets un message pour voir quelle catégorie j'ai récuperé
         });
       });
     });

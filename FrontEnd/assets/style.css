@@ -2,7 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-
+/**************** CODE DONNEE **************************************/
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -187,10 +187,38 @@ footer nav ul {
 	margin: 2em
 }
 
+/****************** CODE RAJOUTE ****************************/
+
+/***** BARRE FILTRE ***********/
+.filter-bar{
+	display: flex;
+    flex-direction: row;  
+	justify-content: center;
+	gap : 15px; 
+}
+
+.filter-bar :active {
+	background-color: #1D6154 ;
+	color: white;
+    cursor: pointer;
+}
+
+/********* BOUTONS FILTRES ****************/ 
 
 .filter-btn{
 	font-family: 'Syne';
 	font-weight: 700;
-	font-size: 30px;
-	color: #1D6154
+	font-size: 16px;
+	color: #1D6154;
+	background-color: white;
+    box-sizing: border-box;    
+    align-items: center;    
+    padding: 10px 20px;
+    cursor: pointer;   
+    transition: all 0.3s ease;     
+    border: 1px solid #1D6154;
+    border-radius: 25px 25px 25px 25px; 
+	margin-bottom: 1em;   	
 }
+
+
