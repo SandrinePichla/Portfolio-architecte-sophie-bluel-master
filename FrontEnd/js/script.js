@@ -60,7 +60,7 @@ async function getWorks() {
     uniqueCategories.forEach(category => {
       const button = document.createElement("button");
       button.className = "filter-btn";
-      button.dataset.category = category;
+      button.dataset.category = category; // on enregistre le nom de la catégorie
       button.textContent = category;
       filtersContainer.appendChild(button);
     });
