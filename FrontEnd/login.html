@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
 	<title>Page de connexion</title>
@@ -19,7 +19,7 @@
 			<!--MENU-->
 			<li><a href="#" target="_blank">projets</a></li>
 			<li><a href="#" target="_blank">contact</a></li>
-			<li><a href="connexion.html" target="_blank">login</a></li>
+			<li><a href="login.html" target="_blank">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -45,10 +45,13 @@
 				<!--bouton se connecter -->
 				<button type="submit" id="login">Se connecter</button>
 				<!--mot de passe oublié -->
-				<a href="#" class="forgot-password">Mot de passe oublié</a>
+				<p class="forgot-password">Mot de passe oublié</p>
+				
 			</div>
 		</form>
-		 <p id="error-message" style="color: red; display: none;"></p>
+		<div class="error-message">
+		 	<p id="error-message" style="color: red; display: none;"></p>
+		</div>
     </section>
 </main>
 <footer class="footer-login" >
@@ -59,4 +62,5 @@
 	</nav>
 </footer>    
 </body>
+<script src="./js/login.js"></script>
 </html>
