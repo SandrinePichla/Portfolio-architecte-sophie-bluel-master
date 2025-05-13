@@ -190,6 +190,28 @@ footer nav ul {
 }
 
 /****************** CODE RAJOUTE ****************************/
+/************* MODAL ***********************/
+.modal {
+	display: flex;
+	flex-direction: row;
+	gap: 30px;
+	justify-content: center;
+}
+
+.button_modal {
+	margin-bottom: 30px;
+}
+
+.modifier-btn {
+	background: none;
+	border: none;
+	color: #000; /* ou un autre gris */
+	font-family: 'Work Sans';
+	font-size: 14px;
+	cursor: pointer;
+	padding: 6px 0 0 0;			
+}
+
 
 /***** BARRE FILTRE ***********/
 .filter-bar{

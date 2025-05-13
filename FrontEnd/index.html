@@ -7,6 +7,9 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+         crossorigin="anonymous" referrerpolicy="no-referrer">
 	<!--LIEN VERS FICHIER CSS -->
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
@@ -39,10 +42,17 @@
 	</section>
 	<section id="portfolio">
 		<!--Titre mes projets -->
+		<div class="modal">
 		<h2>Mes Projets</h2>
-		<!--MENU FILTRE rajout de la class-->
+			<div class="button-modal">		
+				<!--AJOUT DE L'ICONE MODIFIER -->
+				<i class="fa-regular fa-pen-to-square"></i>
+				<!--AJOUT DU BOUTON POUR AFFICHER LA MODALE -->
+				<button id="open-modal" class="modifier-btn" style="display:inline-block">modifier</button>
+			</div>
+		</div>
+			<!--MENU FILTRE rajout de la class-->
 		<div class="filter-bar">
-
 		</div>
 		<!--LES PROJETS S'AFFICHENT ICI-->		
 		<div class="gallery">
@@ -116,6 +126,14 @@
 		</ul>
 	</nav>
 </footer>
+<!-- LIEN VERS LA MODALE AVANT LE SCRIPT -->
+ <div id="modal" class="modal">
+	<div class="modal-content">
+		<span id="close-modal" class="modal-close">&times;</span>
+		<h2>Ma modale</h2>
+		<p>Contenu ici…</p>
+	</div>
+</div>
 <!--LIEN VERS LE FICHIER SCRIPT-->
 <script src="/FrontEnd/js/script.js"></script>
 </body>
