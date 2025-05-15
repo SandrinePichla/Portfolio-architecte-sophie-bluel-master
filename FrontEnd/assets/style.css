@@ -2,8 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-/***************************************** PAGE D'ACCUEIL ****************************************/
-/**************** CODE DONNEE **************************************/
+/** CODE DONNE **/
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -54,26 +53,6 @@ body {
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
-
-.bandeau {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	gap: 10px;
-	background-color: #000;
-	height: 50px;
-	color: white;
-}
-
-.bandeau h3{
-	margin-top: 20px;
-}
-
-.bandeau .fa-regular {
-	margin-top: 20px;
-}
-
-
 
 .header {
 	display: flex;
@@ -210,31 +189,9 @@ footer nav ul {
 	margin: 2em
 }
 
-/****************** CODE RAJOUTE ****************************/
-/************* MODAL ***********************/
-.modal {
-	display: flex;
-	flex-direction: row;
-	gap: 30px;
-	justify-content: center;
-}
-
-.button_modal {
-	margin-bottom: 30px;
-}
-
-.modifier-btn {
-	background: none;
-	border: none;
-	color: #000; /* ou un autre gris */
-	font-family: 'Work Sans';
-	font-size: 14px;
-	cursor: pointer;
-	padding: 6px 0 0 0;			
-}
-
-
-/***** BARRE FILTRE ***********/
+/*** CODE RAJOUTE ***/
+/** MENU FILTRE **/
+/* BARRE FILTRE */
 .filter-bar{
 	display: flex;
     flex-wrap: wrap;  
@@ -243,9 +200,7 @@ footer nav ul {
 	gap : 15px; 	
 }
 
-
-/********* BOUTONS FILTRES ****************/ 
-
+/* BOUTONS FILTRES */ 
 .filter-btn{
 	font-family: 'Syne';
 	font-weight: 700;
@@ -265,7 +220,7 @@ footer nav ul {
 	background-color: #1D6154;	
 	}
 
-/********************************************** PAGE DE CONNEXION *************************************/
+/** PAGE DE LOGIN **/
 #connexion h2 {
 	text-align: center;
 	margin-bottom: 1em;		
@@ -275,6 +230,13 @@ footer nav ul {
 	background-color: #FFFEF8;
 	max-height: 1024px;
 }
+
+#connexion header {
+	display: flex;
+	justify-content: space-between;
+	margin: 50px 0
+}
+
 a {
   text-decoration: none;
   color: black;
@@ -335,7 +297,7 @@ font-size: 30px;
   height: 35px;
 }
 
-#login{
+#login, #add-photo {
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 16px;
@@ -346,7 +308,8 @@ font-size: 30px;
     cursor: pointer;     
     border: 1px solid #1D6154;
     border-radius: 25px 25px 25px 25px; 
-	max-width: 200px;	  	
+	max-width: 200px;	
+	justify-content: center;  	
 }
 
 .forgot-password {
@@ -367,6 +330,89 @@ font-size: 30px;
 	font-family: 'Work Sans';
 	font-size: 14px;
 	font-weight: 300;
+}
+
+/** HOMEPAGE EDIT **/
+/* BANDEAU */
+.bandeau {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 10px;
+	background-color: #000;
+	height: 50px;
+	color: white;
+	width: 100%;
+}
+
+.bandeau h3{
+	margin-top: 20px;
+}
+
+.bandeau .fa-regular {
+	margin-top: 20px;
+}
+
+/* BOUTON OUVERTURE MODALE */
+.title-my-works {
+	display: flex;
+	flex-direction: row;
+	gap: 30px;
+	justify-content: center;
+}
+
+.button-modal .fa-regular {
+	margin-top: 10px;
+}
+
+.button-modal {
+	margin-bottom: 30px;
+	gap: 10px;
+}
+
+#open-modal {
+	background: none;
+	border: none;
+	color: #000; /* ou un autre gris */
+	font-family: 'Work Sans';
+	font-size: 14px;
+	cursor: pointer;
+	padding: 6px 0 0 0;			
+}
+
+/* LA MODALE*/
+
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  position: relative;
+  width: 80%;
+  max-width: 500px;
+}
+.modal-content h2 {
+	font-family: 'Work Sans';
+	font-size: 26px;
+	color: #000;
+	font-weight: 400;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 

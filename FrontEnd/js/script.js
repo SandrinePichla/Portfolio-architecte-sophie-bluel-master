@@ -1,9 +1,9 @@
+// = GESTION AFFICHAGE DES PROJETS =
 // 1 : Je sélectionne l'élément où on va afficher les projets => dans la class gallery
 const gallery = document.querySelector(".gallery");
 
 // 2 : Je selectionne ma filter-bar
 const filtersContainer = document.querySelector(".filter-bar"); 
-
 
 // 1 : Fonction pour récupérer les travaux depuis l'API
 // Fonction async pour attendre que les operations soient terminees
@@ -116,4 +116,59 @@ async function getWorks() {
   
   // Appel de la fonction
   getWorks();
-  
+
+
+
+// = GESTION DU MODE ADMIN =
+// Charger le DOM avant d'exécuter le code => on encadre le code
+document.addEventListener("DOMContentLoaded", () => {
+  const token = localStorage.getItem('token');
+
+  const bandeau = document.querySelector('.bandeau');
+  const buttonModal = document.querySelector('.button-modal');  
+  const logoutBtn = document.querySelector('a[href="index.html"]');
+  const loginLink = document.querySelector('a[href="login.html"]');
+
+  if (token) {
+    // Si le token est bien sotcké => on affiche les éléments du mode admin et efface "login"
+    if (bandeau) bandeau.style.display = 'flex';
+    if (buttonModal) buttonModal.style.display = 'flex';
+    if (logoutBtn) logoutBtn.style.display = 'inline-block';
+    if (loginLink) loginLink.style.display = 'none';
+
+    // Fonction de déconnexion
+    logoutBtn.addEventListener('click', () => {
+      // si on veut sz déloguer on éfface le token lorsqu'on clique sur le bouton logout et on recharge la page d'accueil
+      localStorage.removeItem('token');
+      window.location.reload();
+    });
+  } else {
+    // Si on n'est pas logué => page d'accueil normale => on masque les éléments admin et affiche "login"
+    if (bandeau) bandeau.style.display = 'none';
+    if (buttonModal) buttonModal.style.display = 'none';
+    if (logoutBtn) logoutBtn.style.display = 'none';
+    if (loginLink) loginLink.style.display = 'inline-block';
+  }
+});
+
+// = GESTION DE LA MODALE =
+// open-modal => bouton modifier
+const openModalBtn = document.getElementById('open-modal');
+//close-modal => croix sur la modal
+const closeModalBtn = document.getElementById('close-modal');
+// bloc modal 
+const modal = document.getElementById('modal');
+
+// Ouverture de la modale si on clique sur "modifier" et si modale existe
+if (openModalBtn && modal) {
+  openModalBtn.addEventListener('click', () => {
+    modal.style.display = 'block';
+  });
+}
+
+// Fermeture de la modale si on clique sur la X et si la modale existe
+if (closeModalBtn && modal) {
+  closeModalBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+ }

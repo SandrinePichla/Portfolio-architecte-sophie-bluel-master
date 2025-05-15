@@ -18,18 +18,20 @@
 <body>	
 <header>
 	<div class="bandeau">
-		<!--BANDEAU ADMINISTRATEUR-->
+		<!--BANDEAU MODE ADMIN-->
 		<i class="fa-regular fa-pen-to-square"></i>
 		<h3>Mode édition</h3>
-	</div>
+	</div>	
 	<div class="header">
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
 			<ul>
 				<!--MENU-->
 				<li>projets</li>
-				<li>contact</li>
-				<li><a href="login.html" target="_blank">login/logout</a></li>
+				<li>contact</li>				
+				<!--Login / Logout à gerer en JS MODE ADMIN-->
+				<li><a href="login.html">login</a></li>
+				<li><a href="index.html">logout</a></li>				
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
@@ -49,14 +51,24 @@
 	</section>
 	<section id="portfolio">
 		<!--Titre mes projets -->
-		<div class="modal">
-		<h2>Mes Projets</h2>
-			<div class="button-modal">		
-				<!--AJOUT DE L'ICONE MODIFIER -->
-				<i class="fa-regular fa-pen-to-square"></i>
-				<!--AJOUT DU BOUTON POUR AFFICHER LA MODALE -->
-				<button id="open-modal" class="modifier-btn" style="display:inline-block">modifier</button>
-			</div>
+		<div class="title-my-works">
+			<h2>Mes Projets</h2>
+			<!--AJOUT DU LIEN VERS LA MODALE MODE ADMIN-->
+				<div class="button-modal">		
+					<!--AJOUT DE L'ICONE MODIFIER -->
+					<i class="fa-regular fa-pen-to-square"></i>
+					<!--AJOUT DU BOUTON POUR AFFICHER LA MODALE -->
+					<button id="open-modal" style="display: inline-block;">modifier</button>
+				</div>
+					<!-- MODALE -->
+				<div id="modal" class="modal" style="display: none;">
+					<div class="modal-content">
+						<span id="close-modal" class="modal-close">&times;</span>
+						<h2>Galerie Photo</h2>
+						<!--bouton se connecter -->
+				<button type="submit" id="add-photo">Ajouter une photo</button>
+					</div>
+				</div>
 		</div>
 			<!--MENU FILTRE rajout de la class-->
 		<div class="filter-bar">
@@ -133,13 +145,8 @@
 		</ul>
 	</nav>
 </footer>
-<!-- LIEN VERS LA MODALE AVANT LE SCRIPT -->
- <div id="modal" class="modal">
-	<div class="modal-content">
-		<h2>Je code ma modale ici</h2>		
-	</div>
-</div>
-<!--LIEN VERS LE FICHIER SCRIPT-->
+
+<!--LIEN VERS LE FICHIER SCRIPT D'AFFICHAGE DES PROJETS-->
 <script src="/FrontEnd/js/script.js"></script>
 </body>
 </html>
