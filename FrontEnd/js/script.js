@@ -14,12 +14,10 @@ async function getWorks() {
       try {
         const response = await fetch("http://localhost:5678/api/works");
         const works = await response.json();
-    
-        //  TEST : Affiche les données dans la console
-        console.log("Tous les travaux sont récupérés :", works);
+            
         
-        // je vide la galerie des anciens travaux 
-  
+        
+        // je vide la galerie des anciens travaux   
         gallery.innerHTML = ""; 
     
         // je créer mes nouveaux élements et je les raccroche aux dossiers parents
@@ -37,9 +35,7 @@ async function getWorks() {
           gallery.appendChild(figure);
         });
 
-
-
-// --- 2 : PARTIE FILTRAGE Récupération des catégories uniques ---
+// -- 2 : PARTIE FILTRAGE Récupération des catégories uniques ---
     const uniqueCategories = []; // création d'un tableau vide pour stocker les catégories
     works.forEach(work => {
       const categoryName = work.category.name; // Pour chaque projet, on va chercher le nom de la catégorie
@@ -48,7 +44,7 @@ async function getWorks() {
       }
     });
 
-    // --- Création des boutons de filtre ---
+    // -- Création des boutons de filtre ---
     // On ajoute le bouton tous = affichage par defaut de tous les projets
     const allButton = document.createElement("button"); // on crée le bouton HTML
     allButton.className = "filter-btn active"; // classe + active = selectionné
@@ -65,12 +61,11 @@ async function getWorks() {
       filtersContainer.appendChild(button);
     });
 
-
     // je récupère tous les boutons qui ont la classe filter-btn
     const allButtons = document.querySelectorAll(".filter-btn");
 
-    // --- Gestion des filtres ---
-    // --- j'ecoute le click sur chaque bouton
+    // -- Gestion des filtres ---
+    // -- j'ecoute le click sur chaque bouton
     allButtons.forEach(button => {
       button.addEventListener("click", () => {
         const selectedCategory = button.dataset.category; // on repere la categorie cliquée
@@ -102,26 +97,52 @@ async function getWorks() {
           figure.appendChild(img);
           figure.appendChild(caption);
           gallery.appendChild(figure);
-
-           console.log("j'ai récuperé les projets de la catégorie :", selectedCategory); // je mets un message pour voir quelle catégorie j'ai récuperé
         });
       });
     });
 
+    // 3 Affichage de la galerie de photos dans la modale, comme pour les projets :
+    function displayModalGallery(works) {
+      const modalGallery = document.getElementById("modal-gallery");
+      modalGallery.innerHTML = ""; // je vide la galerie avant d'ajouter les photos
+
+      works.forEach(work => {
+        const figure = document.createElement("figure");
+        const img = document.createElement("img");
+        img.src = work.imageUrl;
+        img.alt = work.title;
+
+        // Je crée l'icône de suppression = poubelle
+        const deleteIcon = document.createElement("i");
+        deleteIcon.className = "fa-solid fa-trash-can delete-icon";
+
+        // J'écoute le click sur la poubelle
+        deleteIcon.addEventListener("click", () => {
+          deleteWork(work.id); // fonction à écrire ensuite
+
+
+        });
+
+        figure.appendChild(img);
+        figure.appendChild(deleteIcon);
+        modalGallery.appendChild(figure);
+      });
+    }
+
+    // 3 Modale Affichage des photos dans la modale
+        displayModalGallery(works);
+
     // et si on a un problème, un message d'erreur s'affiche :
       } catch (error) {
         console.error("Afficher un message d'erreur lors du chargement des travaux :", error);
-      }
+      }      
     }
   
-  // Appel de la fonction
+  // Appel de la fonction getWorks
   getWorks();
 
 
-
 // = GESTION DU MODE ADMIN =
-// Charger le DOM avant d'exécuter le code => on encadre le code
-document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem('token');
 
   const bandeau = document.querySelector('.bandeau');
@@ -148,8 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (buttonModal) buttonModal.style.display = 'none';
     if (logoutBtn) logoutBtn.style.display = 'none';
     if (loginLink) loginLink.style.display = 'inline-block';
-  }
-});
+  };
 
 // = GESTION DE LA MODALE =
 // open-modal => bouton modifier
@@ -162,7 +182,7 @@ const modal = document.getElementById('modal');
 // Ouverture de la modale si on clique sur "modifier" et si modale existe
 if (openModalBtn && modal) {
   openModalBtn.addEventListener('click', () => {
-    modal.style.display = 'block';
+    modal.style.display = 'flex';
   });
 }
 
