@@ -498,8 +498,8 @@ font-size: 30px;
   height: 150px;
   background-color: #E8F1F6;
   position: relative;
-  overflow: hidden; /* Important pour que l'image ne déborde pas */
-  padding: 0; /* Enlève le padding pour ne pas créer d'espace autour */
+  overflow: hidden; /* => pour que l'image ne déborde pas */
+  padding: 0; /* =>pas créer d'espace autour */
 }
 .upload-label {
 	display: flex;
