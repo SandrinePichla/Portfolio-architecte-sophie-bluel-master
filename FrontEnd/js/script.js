@@ -117,8 +117,8 @@ async function getWorks() {
 
   const bandeau = document.querySelector('.bandeau');
   const buttonModal = document.querySelector('.button-modal');  
-  const logoutBtn = document.querySelector('a[href="index.html"]');
-  const loginLink = document.querySelector('a[href="login.html"]');
+  const logoutBtn = document.querySelector('.lougout-page');
+  const loginLink = document.querySelector('.login-page');
 
   if (token) {
     // Si le token est bien sotcké => on affiche les éléments du mode admin et efface "login"
