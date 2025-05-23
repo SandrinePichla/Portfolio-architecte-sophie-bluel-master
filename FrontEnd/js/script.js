@@ -119,6 +119,7 @@ async function getWorks() {
   const buttonModal = document.querySelector('.button-modal');  
   const logoutBtn = document.querySelector('.lougout-page');
   const loginLink = document.querySelector('.login-page');
+  const filterBar = document.querySelector('.filter-bar')
 
   if (token) {
     // Si le token est bien sotcké => on affiche les éléments du mode admin et efface "login"
@@ -126,6 +127,7 @@ async function getWorks() {
     if (buttonModal) buttonModal.style.display = 'flex';
     if (logoutBtn) logoutBtn.style.display = 'inline-block';
     if (loginLink) loginLink.style.display = 'none';
+    if(filterBar) filterBar.style.display = 'none' ;
 
     // Fonction de déconnexion
     logoutBtn.addEventListener('click', () => {
