@@ -62,66 +62,70 @@
 								<!--AJOUT DU BOUTON POUR AFFICHER LA MODALE -->
 								<button id="open-modal" style="display: inline-block;">modifier</button>
 							</div>
-							<!-- BLOC PREMIERE MODALE -->
+							<!-- BLOC MODALE -->
 							<div id="modal" class="modal" style="display: none;">
+								
 								<div class="modal-content">
-									<!-- X de fermeture de la modale -->
-									<span id="close-modal" class="modal-close">&times;</span>
-									<h2>Galerie Photo</h2>
-									<!-- emplacememnt de la galerie de photos -->
-									<div id="modal-gallery" class="modal-gallery"></div>
-									<!-- barre grise -->
-									<div class="modal-divider"></div> 
-									<!--bouton se connecter -->
-									<button  type="submit" id="add-photo">Ajouter une photo</button>
-									
-								</div>
-							</div>
-							<!-- BLOC DEUXIEME MODALE -->
-							<div class="modal modal-photo hidden" id="modal-photo">
-								<div class="modal-content">
-									<!-- Flèche retour -->
-									<span class="arrow-back" id="back-to-gallery">
-										<i class="fa-solid fa-arrow-left"></i>
-									</span>
 
-									<!-- X de fermeture de la modale -->
-									<span id="close-modal" class="modal-close">&times;</span>
-									<h2>Ajout photo</h2>
-
-									<!-- Upload photo -->
-									<div class="upload-box">
-										<label for="file-input" class="upload-label" id="upload-label">
-											<i class="fa-regular fa-image icon-upload"></i> <br>
-											<p class="title-upload">+ Ajouter photo</p> <br>
-											<p class="upload-info">jpg, png : 4mo max</p> <br>
-										</label>
-										<input type="file" id="file-input" accept="image/*" />
-
-										<!-- Prévisualisation de l'image - masquée par défaut -->
-										<img id="image-preview" style="display: none; height: 100%; width: 100%; object-fit: contain;" />
+									<!-- ===== VUE 1 : Galerie ===== -->															
+									<div id="modal-gallery-view" class="modal-view">
+										<h2>Galerie Photo</h2>
+										<!-- emplacememnt de la galerie de photos -->
+										<div id="modal-gallery" class="modal-gallery"></div>
+										<!-- barre grise -->
+										<div class="modal-divider"></div> 
+										<!--bouton se connecter -->
+										<button  type="submit" id="add-photo">Ajouter une photo</button>
+										<!-- X de fermeture de la modale -->
+										<span id="close-modal" class="modal-close">&times;</span>
 									</div>
 									
-									<!-- Titre + Catégorie -->
-									<div class="form-fields">
-										<!-- Titre -->
-										<label for="title">Titre</label>
-										<input type="text" id="title" name="title" placeholder="" />
+									<!-- ===== VUE 2 : Formulaire d'ajout ===== -->							
+									<div id="modal-photo" class="modal-view hidden" >										
+										<!-- Flèche retour -->
+										<span class="arrow-back" id="back-to-gallery">
+											<i class="fa-solid fa-arrow-left"></i>
+										</span>
 
-										<!-- Catégorie -->
-										<label for="category">Catégorie</label>
-										<select id="category" name="category">							
-										</select>
+										<!-- X de fermeture de la modale -->
+										<span id="close-photo-modal" class="modal-close">&times;</span>
+										<h2>Ajout photo</h2>
+
+										<!-- Upload photo -->
+										<div class="upload-box">
+											<label for="file-input" class="upload-label" id="upload-label">
+												<i class="fa-regular fa-image icon-upload"></i> <br>
+											<span class="title-upload">	+ Ajouter photo</span> <br>
+											<span class="upload-info">jpg, png : 4mo max </span><br>
+											</label>
+											<input type="file" id="file-input" accept="image/*" >
+
+											<!-- Prévisualisation de l'image - masquée par défaut -->
+											<img src="path/to/image.jpg" alt="Photo d’un projet d’architecte" id="image-preview" style="display: none; height: 100%; width: 100%; object-fit: contain;">
+										</div>
+										
+										<!-- Titre + Catégorie -->
+										<div id="form-fields" class="form-fields">
+											<!-- Titre -->
+											<label for="title">Titre</label>
+											<input type="text" id="title" name="title" placeholder="" >
+
+											<!-- Catégorie -->
+											<label for="category">Catégorie</label>
+											<select id="category" name="category">							
+											</select>
+										</div>
+										
+										<!-- barre grise -->
+										<div class="modal-divider"></div> 
+
+										<!-- Bouton valider -->
+										<button class="btn-validate">Valider</button>
 									</div>
-									
-									<!-- barre grise -->
-									<div class="modal-divider"></div> 
-
-									<!-- Bouton valider -->
-									<button class="btn-validate">Valider</button>
 								</div>
 							</div>
 					</div>
+					
 						<!--MENU FILTRE rajout de la class-->
 					<div class="filter-bar">
 					</div>

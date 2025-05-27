@@ -1,4 +1,13 @@
 // = GESTION DE LA PAGE DE CONNEXION =
+
+// Fonction qui efface les identifiants :
+ function resetLoginForm() {
+  const form = document.getElementById("login-form");
+  if (form) {
+    form.reset();
+  }
+}
+
 document.getElementById('login-form').addEventListener('submit', async function (event) {
   // on ecoute le bouton "se connecter"", fonction asynchrone pour attendre toutes les réponses
   event.preventDefault(); // on empêche le rechargement de la page

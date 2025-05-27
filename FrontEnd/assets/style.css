@@ -57,10 +57,10 @@ table {
 .header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 0;
 }
 section {
-	margin: 50px 0
+	margin: 50px 0;
 }
 
 h1{
@@ -76,7 +76,7 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
+
 }
 
 h2{
@@ -143,7 +143,7 @@ li:hover {
 }
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #contact > * {
 	text-align: center;
@@ -235,7 +235,7 @@ footer nav ul {
 #connexion header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 0;
 }
 
 a {
@@ -406,8 +406,7 @@ font-size: 30px;
   justify-content: center;
   align-items: flex-start;
   z-index: 1000; /* en premier plan */
-  overflow-y: auto; /* Permet le scroll si contenu long */
-  
+  overflow-y: auto; /* Permet le scroll si contenu long */  
 }
 
 .modal-content {
@@ -422,6 +421,17 @@ font-size: 30px;
   flex-direction: column;
   gap: 5px;  
   align-items: center;
+}
+
+#modal-gallery-view {
+	width: 440px;
+	margin: 0 40px;
+}
+
+#modal-photo {
+	width: 440px;
+	margin: 0 40px;
+	height: 518.98px;
 }
 
 .modal-content h2 {
@@ -441,7 +451,7 @@ font-size: 30px;
 }
 
 .modal-divider {
-  width: 85%;
+  width: 100%;
   height: 1px;
   background-color: #B3B3B3;
   margin: 2rem auto;
@@ -455,7 +465,6 @@ font-size: 30px;
   gap: 10px;
   margin-top: 20px;
   margin-bottom: 20px;
-  margin-left: 45px;
 }
 
 .modal-gallery figure {
@@ -483,9 +492,9 @@ font-size: 30px;
 }
 
 
-/* DEUXIEME MODALE */
+/* DEUXIEME VUE */
 
-.modal.hidden {
+.hidden {
   display: none;
 }
 
@@ -579,13 +588,20 @@ select {
 }
 
 #modal-photo input,
-#category {
-  padding: 0.5rem;
+#category {  
   border: 1px solid #ccc; 
   box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
-  width: 420px;
+  width: 100%;
   height: 35px;
-  margin-bottom: 1rem;
+  margin: 0;
+}
+
+#form-fields input {
+  padding: 0;
+  border: 1px solid #ccc; 
+  box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+  width: 100%;
+  height: 35px;
 }
 
 #image-preview {
@@ -609,4 +625,5 @@ select {
   align-items: flex-start; /* Aligne à gauche */
   gap: 10px;
   margin-top: 20px;
+  margin-bottom: 10px;
 }

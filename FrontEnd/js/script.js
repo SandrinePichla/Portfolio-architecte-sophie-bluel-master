@@ -1,7 +1,6 @@
-// = 1 Affichage des projets (galerie principale)  Fonction	getWorks() =
-//  Je sélectionne l'élément où on va afficher les projets => dans la class gallery
+// = 1 Affichage des projets (galerie principale)  
+// Fonction	getWorks()
 const gallery = document.querySelector(".gallery");
-
 // Je selectionne ma filter-bar
 const filtersContainer = document.querySelector(".filter-bar"); 
 
@@ -17,7 +16,7 @@ async function getWorks() {
         // je vide la galerie des anciens travaux   
         gallery.innerHTML = ""; 
     
-        // je créer mes nouveaux élements et je les raccroche aux dossiers parents
+        // je génère mes projets et je les raccroche aux dossiers parents
         works.forEach(work => {
           const figure = document.createElement("figure");
           const img = document.createElement("img");
@@ -32,7 +31,7 @@ async function getWorks() {
           gallery.appendChild(figure);
         });
 
-        // création des catégories uniques
+        // Je génère des catégories uniques
           const uniqueCategories = []; // création d'un tableau vide pour stocker les catégories
           works.forEach(work => {
             const categoryName = work.category.name; // Pour chaque projet, on va chercher le nom de la catégorie
@@ -75,14 +74,15 @@ async function getWorks() {
               button.classList.add("active");
 
               // --- Affichage filtré ---
-              // on vide la gallery
-              gallery.innerHTML = "";
-
               // si on a cliqué sur tous, on les affiche tous
               const filteredWorks = selectedCategory === "Tous"
                 ? works
               // sinon on utilise .filter pour garder la bonne catégorie
                 : works.filter(work => work.category.name === selectedCategory);
+
+              // on vide la gallery
+              gallery.innerHTML = "";
+
 
               // comme dans getWorks : pour chaque projet filtré , on recré les balises et on les ajoute dans la galerie
               filteredWorks.forEach(work => {
@@ -118,16 +118,16 @@ async function getWorks() {
   const bandeau = document.querySelector('.bandeau');
   const buttonModal = document.querySelector('.button-modal');  
   const logoutBtn = document.querySelector('.lougout-page');
-  const loginLink = document.querySelector('.login-page');
-  const filterBar = document.querySelector('.filter-bar')
-
+  const loginLink = document.querySelector('.login-page');                                 
+  
   if (token) {
     // Si le token est bien sotcké => on affiche les éléments du mode admin et efface "login"
     if (bandeau) bandeau.style.display = 'flex';
     if (buttonModal) buttonModal.style.display = 'flex';
     if (logoutBtn) logoutBtn.style.display = 'inline-block';
-    if (loginLink) loginLink.style.display = 'none';
-    if(filterBar) filterBar.style.display = 'none' ;
+    if (loginLink) loginLink.style.display = 'none';    
+    if(filtersContainer) filtersContainer.style.display = 'none' ;
+
 
     // Fonction de déconnexion
     logoutBtn.addEventListener('click', () => {
@@ -143,18 +143,23 @@ async function getWorks() {
     if (loginLink) loginLink.style.display = 'inline-block';
   };
 
-// = GESTION DE LA PREMIERE MODALE =
+//= MODALE UNIQUE AVEC DEUX VUES  =
 // open-modal => clique sur bouton "modifier"
 const openModalBtn = document.getElementById('open-modal');
-//close-modal => croix sur la modal
-const closeModalBtn = document.getElementById('close-modal');
 // bloc modal 
 const modal = document.getElementById('modal');
+//close-modal => croix sur la modal
+const closeModalBtn = document.getElementById('close-modal');
 
 // Ouverture de la modale si on clique sur "modifier" et si modale existe
 if (openModalBtn && modal) {
   openModalBtn.addEventListener('click', () => {
     modal.style.display = 'flex';
+
+    // OUVERTURE FENETRE PRINCIPALE
+    document.getElementById("modal-gallery-view").style.display = "block";
+    document.getElementById("modal-photo").classList.add('hidden');
+
     loadGallery();
 });
 }
@@ -169,6 +174,7 @@ if (closeModalBtn && modal) {
 function displayModalGallery(works) {
   const modalGallery = document.getElementById("modal-gallery");
   modalGallery.innerHTML = ""; // On vide d'abord
+
 // On crée les éléments : 
   works.forEach(work => {
     const figure = document.createElement("figure");
@@ -179,7 +185,7 @@ function displayModalGallery(works) {
     const deleteIcon = document.createElement("i");
     deleteIcon.className = "fa-solid fa-trash-can delete-icon";
 
-// J'écoute le clic sur la corbeille
+// J'écoute le clic sur la corbeille + windows.confirm
     deleteIcon.addEventListener("click", () => {
       const confirmed = window.confirm("Supprimer ce projet ?");
       if (confirmed) {
@@ -216,9 +222,9 @@ async function deleteWork(workId) {
       }
     });
 
-    if (response.ok) {
-      console.log("Projet supprimé !");
+    if (response.ok) {      
       loadGallery(); // Mise à jour immédiate de la galerie
+      getWorks(); // mise à jour des projets
     } else {
       console.error("Échec de la suppression :", response.status);
     }
@@ -227,32 +233,63 @@ async function deleteWork(workId) {
   }
 }
 
-// GESTION DE LA Deuxième modale : ajout de projets :
-const openSecondModalBtn = document.querySelector('#add-photo'); // bouton "Ajouter une photo" => ouverture de la 2ème modale
+// DEUXIEME VUE => AJOUT DE PHOTOS :
+const openSecondModalBtn = document.querySelector('#add-photo'); // bouton "Ajouter une photo" => ouverture de la 2ème vue
 const modalPhoto = document.querySelector('#modal-photo');
-const closePhotoModal = modalPhoto.querySelector('#close-modal');
+const closePhotoModal = modalPhoto.querySelector('#close-photo-modal');
 
 // On écoute le click sur le bouton "Ajouter une photo"
 openSecondModalBtn.addEventListener('click', () => {
+  document.getElementById("modal-gallery-view").style.display = "none";
   modalPhoto.classList.remove('hidden');
   loadCategories(); //  on appelle la fonction ici à chaque ouverture
 });
 
+// FONCTION REINITIALISATION AJOUT PHOTO
+function resetAddPhotoForm() {
+  titleInput.value = '';    // 1. Vider les champs texte
+  categorySelect.selectedIndex = 0;  
+  fileInput.value = '';  // 2. Réinitialiser l'input fichier
+  previewImage.src = '';  // 3. Masquer la prévisualisation d’image
+  previewImage.style.display = 'none';
+  uploadLabel.style.display = '';  // 5 Réaffiche le "label"
+}
+
+// Flèche retour vers la première vue
+const backToGalleryBtn = document.getElementById('back-to-gallery');
+const titleInput = document.getElementById('title');
+// On écoute le clique sur la flèche retour
+  backToGalleryBtn.addEventListener('click', () => {
+    // 1. Afficher la vue galerie, cacher la vue "Ajout photo" :
+    document.getElementById("modal-gallery-view").style.display = "block"; // on affiche la galerie
+    modalPhoto.classList.add('hidden'); //  on masque la modale d'ajout de photo 
+
+    resetAddPhotoForm() // On réinitialise le formulaire d'ajout de photos
+
+    loadGallery();     //  on recharge les projets dans la modale si besoin
+  });
+
 // On écoute le clique sur la croix
 closePhotoModal.addEventListener('click', () => {
-  modalPhoto.classList.add('hidden'); //  on masque la 2ème modale
+  modal.style.display = 'none'; // on ferme toute la modale
+
+  resetAddPhotoForm() // On réinitialise le formulaire d'ajout de photos
 });
 
-// Retour vers la première modale
-const backToGalleryBtn = document.getElementById('back-to-gallery');
-// On écoute le clique sur la flèche retour
-if (backToGalleryBtn) {
-  backToGalleryBtn.addEventListener('click', () => {
-    modalPhoto.classList.add('hidden'); //  on masque la modale d'ajout de photo
-    modal.style.display = 'flex';       //  on réaffiche la modale galerie
-    loadGallery();                      //  on recharge les projets dans la modale si besoin
-  });
-}
+// Fermer la modale quand on clique EN DEHORS de la fenêtre modale
+modal.addEventListener('click', (event) => {
+  // Si le clic se fait directement sur le fond de la modale : 
+  if (event.target === modal) {
+    modal.style.display = 'none';
+
+    // Réinitialise les champs si on venait de la vue "ajout photo"
+    modalPhoto.classList.add('hidden');
+    document.getElementById("modal-gallery-view").style.display = "block";
+
+    // Réinitialise les champs
+    resetAddPhotoForm()
+  }
+});
 
 // Prévisualisation de l'image uploadée
 const fileInput = document.getElementById("file-input");
@@ -321,10 +358,18 @@ validateBtn.addEventListener("click", async (e) => {
     });
 // Si l'envoi du formulaire est OK 
     if (response.ok) {
-      alert("Projet ajouté avec succès !");       
-       modalPhoto.classList.add('hidden'); // masque la 2ème modale
-       modal.style.display = "flex";
+      alert("Projet ajouté avec succès !");  
+
+       resetAddPhotoForm() // On réinitialise le formulaire d'ajout de photos
+
+       // Retour à la galerie
+       modalPhoto.classList.add('hidden'); // masque la 2ème vue
+       document.getElementById("modal-gallery-view").style.display = "block";
+
+       loadGallery();  // recharge la galerie dans la modale
+
        getWorks(); // Recharge la galerie principale après ajout
+
      } else {
        alert("Erreur lors de l’ajout du projet.");
      }
@@ -350,12 +395,10 @@ async function loadCategories() {
       const option = document.createElement("option");
       option.value = category.id;
       option.textContent = category.name;
-      categorySelect.appendChild(option);
-      console.log("Les catégories sont bien chargées")
+      categorySelect.appendChild(option);      
     });
   } catch (error) {
     console.error("Erreur lors du chargement des catégories :", error);
     categorySelect.innerHTML = '<option value="">Erreur de chargement</option>';
   }
 }
-
