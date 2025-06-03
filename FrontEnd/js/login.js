@@ -1,6 +1,6 @@
 // = GESTION DE LA PAGE DE CONNEXION =
 
-// Fonction qui efface les identifiants :
+// == 1 == resetLoginForm Fonction qui efface les identifiants :
  function resetLoginForm() {
   const form = document.getElementById("login-form");
   if (form) {
@@ -8,15 +8,15 @@
   }
 }
 
-document.getElementById('login-form').addEventListener('submit', async function (event) {
-  // on ecoute le bouton "se connecter"", fonction asynchrone pour attendre toutes les réponses
+// == 2 == on ecoute le bouton "se connecter"", fonction asynchrone => continue de lire le code
+document.getElementById('login-form').addEventListener('submit', async function (event) {  
   event.preventDefault(); // on empêche le rechargement de la page
 
   const email = document.getElementById('email').value; // on récupère les infos tapées
   const password = document.getElementById('password').value;
   const errorMessage = document.getElementById('error-message');
 
-  // REGEX
+  // == 3 == REGEX
 
  // REGEX pour l'email
   const emailRegex = /^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z0-9._-]+$/;
@@ -24,7 +24,7 @@ document.getElementById('login-form').addEventListener('submit', async function 
   // REGEX pour un mot de passe : 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial, min 8 caractères
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
 
-  // Vérification des champs
+  // == 4 == Vérification des champs
   if (!emailRegex.test(email)) {
     errorMessage.textContent = "L'adresse email n'est pas valide.";
     errorMessage.style.display = 'block';
@@ -37,7 +37,7 @@ document.getElementById('login-form').addEventListener('submit', async function 
     return;
   }
 
-  // QUAND C'EST OK ENVOI DE LA FONCTION
+  // == 5 ==  Fetch POST envoi login + MDP à l'API
    try {  // try - catch
     const response = await fetch('http://localhost:5678/api/users/login', {
       method: 'POST', // requête POST => envoi à l'API
