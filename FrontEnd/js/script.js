@@ -74,7 +74,7 @@ async function getWorks() {
               button.classList.add("active");
 
               // --- Affichage filtré ---
-              // boutons "tous" => on les affiche tous
+              // boutons "tous" => on les affiche tous (ternaire)
               const filteredWorks = selectedCategory === "Tous"
                 ? works
               // sinon .filter pour garder la bonne catégorie
