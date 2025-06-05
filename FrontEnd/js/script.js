@@ -44,6 +44,7 @@ async function getWorks() {
           filtersContainer.innerHTML = "";
           
           // -- Création des boutons de filtre ---
+
           // Création du bouton tous = affichage par defaut de tous les projets
           const allButton = document.createElement("button"); // on crée le bouton HTML
           allButton.className = "filter-btn active"; // classe + active = selectionné
@@ -96,50 +97,48 @@ async function getWorks() {
                 figure.appendChild(img);
                 figure.appendChild(caption);
                 gallery.appendChild(figure);
-              });              
+              });                           
             });
-          });
-
-        // == 2 == Fonction displayModalGallery - Affichage les photos dans la modale
-        displayModalGallery(works);
+          });         
 
       // et si on a un problème, un message d'erreur s'affiche :
       } catch (error) {
         console.error("Afficher un message d'erreur lors du chargement des travaux :", error);
-      }      
+        }      
     } 
+
 // Appel de la fonction getWorks
 getWorks(); 
 
 // == 2 == GESTION DU MODE ADMIN =
-  const token = localStorage.getItem('token'); //Stockage du token  
-
-  const bandeau = document.querySelector('.bandeau');
-  const buttonModal = document.querySelector('.button-modal');  
-  const logoutBtn = document.querySelector('.lougout-page');
-  const loginLink = document.querySelector('.login-page');                                 
+  // Adaptation Page accueil => administrateur : 
+const token = localStorage.getItem('token'); //Stockage du token  
+const bandeau = document.querySelector('.bandeau'); 
+const logoutBtn = document.querySelector('.lougout-page');
+const loginLink = document.querySelector('.login-page');
+const buttonModal = document.querySelector('.button-modal');                                  
   
   if (token) {
     // Si le token est bien sotcké => on affiche les éléments du mode admin et efface "login"
-    if (bandeau) bandeau.style.display = 'flex';
-    if (buttonModal) buttonModal.style.display = 'flex';
+    if (bandeau) bandeau.style.display = 'flex';    
     if (logoutBtn) logoutBtn.style.display = 'inline-block';
     if (loginLink) loginLink.style.display = 'none';    // login caché
+    if (buttonModal) buttonModal.style.display = 'flex';
     if(filtersContainer) filtersContainer.style.display = 'none' ; // barre filtre cachée
 
 
     // == 3 ==  logoutBtn Fonction de déconnexion
     logoutBtn.addEventListener('click', () => {
-      // si on veut sz déloguer on éfface le token lorsqu'on clique sur le bouton logout et on recharge la page d'accueil
+      // si on veut se déloguer on efface le token lorsqu'on clique sur le bouton logout et on recharge la page d'accueil
       localStorage.removeItem('token');
       window.location.reload();
     });
   } else {
     // Si on n'est pas logué => page d'accueil normale => on masque les éléments admin et affiche "login"
-    if (bandeau) bandeau.style.display = 'none';  // Bandeau caché
-    if (buttonModal) buttonModal.style.display = 'none';  // Bouton ouverture modale caché
+    if (bandeau) bandeau.style.display = 'none';  // Bandeau caché    
     if (logoutBtn) logoutBtn.style.display = 'none';  // Bouton logout caché
     if (loginLink) loginLink.style.display = 'inline-block'; // bouton login visible
+    if (buttonModal) buttonModal.style.display = 'none';  // Bouton ouverture modale caché
   };
 
 //= MODALE UNIQUE AVEC DEUX VUES  =
@@ -199,7 +198,7 @@ function displayModalGallery(works) {
   });
 }
 
-// == 7 == Fonction loadGallery Charger les projets depuis l'API et les afficher
+// == 7 == loadGallery Charger les projets depuis l'API et les afficher
 async function loadGallery() {
   try {
     const response = await fetch("http://localhost:5678/api/works");
@@ -322,7 +321,7 @@ fileInput.addEventListener("change", function () {
 
 // Validation de l'image uploadée 
 const validateBtn = document.querySelector(".btn-validate");
-// == 15 == on écoute le click sur le bouton validation
+// == 15 == click bouton validation
 validateBtn.addEventListener("click", async (e) => {
   e.preventDefault(); // empêche le comportement par défaut de la page
 
@@ -356,6 +355,7 @@ validateBtn.addEventListener("click", async (e) => {
       },
       body: formData, // le contenu de la requête contient tout le formData (image, titre, catégorie)
     });
+
 // Si l'envoi du formulaire est OK 
     if (response.ok) {
       alert("Projet ajouté avec succès !");  
@@ -379,7 +379,7 @@ validateBtn.addEventListener("click", async (e) => {
   }
 });
 
-// == 16 == Fonction loadCategories() remonte les catégories dans le menu déroulant de la 2ème modale
+// == 16 == loadCategories() remonte les catégories dans le menu déroulant de la 2ème modale
 const categorySelect = document.getElementById("category");
 
 async function loadCategories() {
@@ -403,20 +403,20 @@ async function loadCategories() {
   }
 }
 
+// == 17 == Vérifie si tous les chmaps sont remplis = active bouton validation
 const checkFormFields = () => {
-  const submitBtn = document.querySelector(".btn-validate");
-  const fileFilled = fileInput.files.length > 0;
-  const titleFilled = titleInput.value.trim() !== "";
-  const categoryFilled = categorySelect.value !== "";
+  const validateBtn = document.querySelector(".btn-validate");
+  const fileFilled = fileInput.files.length > 0; // vérifie qu'au moins 1 fichier est téléchargé
+  const titleFilled = titleInput.value.trim() !== ""; // vérifie que le champ titre n'est pas vide (supp espace)
+  const categoryFilled = categorySelect.value !== ""; // vérifie qu'1 catégorie sélectionnée
 
   if (fileFilled && titleFilled && categoryFilled) {
-    submitBtn.style.backgroundColor = "#1D6154";
+    validateBtn.style.backgroundColor = "#1D6154"; // si tout est OK chgt couleur du bouton
   } else {
-    submitBtn.style.backgroundColor = "";
+    validateBtn.style.backgroundColor = "";
   }
 };
-
-
+// écoute des évenemnts => recharge checkFormFields
 fileInput.addEventListener("change", checkFormFields);
 titleInput.addEventListener("input", checkFormFields);
-categorySelect.addEventListener("change", checkFormFields);
+categorySelect.addEventListener("change", checkFormFields); 

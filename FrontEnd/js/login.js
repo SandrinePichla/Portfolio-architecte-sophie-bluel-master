@@ -1,6 +1,6 @@
 // = GESTION DE LA PAGE DE CONNEXION =
 
-// == 1 == resetLoginForm Fonction qui efface les identifiants :
+// == 1 == resetLoginForm Fonction qui réinitialise les champs si necessaire:
  function resetLoginForm() {
   const form = document.getElementById("login-form");
   if (form) {
@@ -21,7 +21,7 @@ document.getElementById('login-form').addEventListener('submit', async function 
  // REGEX pour l'email
   const emailRegex = /^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z0-9._-]+$/;
 
-  // REGEX pour un mot de passe : 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial, min 8 caractères
+  // REGEX pour un mot de passe : 1 majuscule, 1 minuscule, 1 chiffre, min 6 caractères
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
 
   // == 4 == Vérification des champs
@@ -49,7 +49,7 @@ document.getElementById('login-form').addEventListener('submit', async function 
 
     if (response.ok) {
       // Si la connexion a réussi,  
-      localStorage.setItem('token', data.token); // on stocke le token dans le navigateur et
+      localStorage.setItem('token', data.token); // on stocke le token dans le navigateur
       window.location.href = 'index.html'; // on redirige vers la page d'accueil
     } else {
       // Sinon = mauvais identifiants
