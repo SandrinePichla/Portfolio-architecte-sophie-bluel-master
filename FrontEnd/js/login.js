@@ -8,23 +8,20 @@
   }
 }
 
-// == 2 == on ecoute le bouton "se connecter"", fonction asynchrone => continue de lire le code
+// == 2 == Le FORMULAIRE
 document.getElementById('login-form').addEventListener('submit', async function (event) {  
-  event.preventDefault(); // on empêche le rechargement de la page
+  event.preventDefault(); 
 
-  const email = document.getElementById('email').value; // on récupère les infos tapées
+  const email = document.getElementById('email').value; // on récupère les infos saisies
   const password = document.getElementById('password').value;
   const errorMessage = document.getElementById('error-message');
 
-  // == 3 == REGEX
 
- // REGEX pour l'email
   const emailRegex = /^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z0-9._-]+$/;
 
-  // REGEX pour un mot de passe : 1 majuscule, 1 minuscule, 1 chiffre, min 6 caractères
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
 
-  // == 4 == Vérification des champs
+  // == 3 == Vérification des champs
   if (!emailRegex.test(email)) {
     errorMessage.textContent = "L'adresse email n'est pas valide.";
     errorMessage.style.display = 'block';
@@ -37,26 +34,26 @@ document.getElementById('login-form').addEventListener('submit', async function 
     return;
   }
 
-  // == 5 ==  Fetch POST envoi login + MDP à l'API
-   try {  // try - catch
+  // == 5 == envoi à l'API
+   try {  
     const response = await fetch('http://localhost:5678/api/users/login', {
-      method: 'POST', // requête POST => envoi à l'API
-      headers: { 'Content-Type': 'application/json' }, // envoi données au format JSON
-      body: JSON.stringify({ email, password }) // transformation des données au format JSON
+      method: 'POST', 
+      headers: { 'Content-Type': 'application/json' }, 
+      body: JSON.stringify({ email, password }) 
     });
 
-    const data = await response.json(); // on attend la réponse et on la lit
+    const data = await response.json();
 
     if (response.ok) {
-      // Si la connexion a réussi,  
-      localStorage.setItem('token', data.token); // on stocke le token dans le navigateur
-      window.location.href = 'index.html'; // on redirige vers la page d'accueil
+       
+      localStorage.setItem('token', data.token); 
+      window.location.href = 'index.html'; 
     } else {
-      // Sinon = mauvais identifiants
-      errorMessage.textContent = 'Erreur dans l’identifiant ou le mot de passe.'; // Afficher le message d'erreur global, ne pas orienter vers le type d'erreur
+      
+      errorMessage.textContent = 'Erreur dans l’identifiant ou le mot de passe.'; 
       errorMessage.style.display = 'block';
     }
-  } catch (error) { // si erreur înatendue => message type
+  } catch (error) { 
     console.error('Erreur lors de la connexion :', error);
     errorMessage.textContent = 'Une erreur est survenue. Veuillez réessayer.';
     errorMessage.style.display = 'block';
